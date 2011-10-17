@@ -1,6 +1,7 @@
 /*!
  * jquery-preparer-handler
  * Version:  0.9.0
+ * Source:  https://github.com/CaryLandholt/jquery-ajaxPreparer-handler
  */
 
 /*global jQuery*/
@@ -17,7 +18,7 @@
 		base.$el = $(base.el);
 		base.options = options;
 		base.metadata = base.$el.data(handlers.ajaxPreparer.defaults.metadatakey);
-		base.$el.data('Conjax', base);
+		base.$el.data(handlers.ajaxPreparer.defaults.dataStorageName, base);
 		base.settings = $.extend(true, {}, handlers.ajaxPreparer.defaults, base.options, base.metadata);
 
 		if (base.el.tagName === 'A') {
@@ -44,6 +45,7 @@
 
 	handlers.ajaxPreparer.defaults = {
 		metadatakey: 'ajax-options',
+		dataStorageName: 'ajaxPreparer',
 		ajaxRequestPreparedEventName: 'ajax-request-prepared'
 	};
 }(jQuery, jQuery.handlers = jQuery.handlers || {}));
