@@ -1,6 +1,6 @@
 /*!
  * jquery-preparer-handler
- * Version:  0.9.0
+ * Version:  0.9.1
  * Source:  https://github.com/CaryLandholt/jquery-ajaxPreparer-handler
  */
 
@@ -11,6 +11,7 @@
 
 	handlers.ajaxPreparer = function (e, options) {
 		var base = this,
+			validTagNames = ['A', 'INPUT', 'SELECT'],
 			ajaxOptions = {},
 			$form;
 
@@ -20,6 +21,12 @@
 		base.metadata = base.$el.data(handlers.ajaxPreparer.defaults.metadatakey);
 		base.$el.data(handlers.ajaxPreparer.defaults.dataStorageName, base);
 		base.settings = $.extend(true, {}, handlers.ajaxPreparer.defaults, base.options, base.metadata);
+
+		if ($.inArray(base.el.tagName, validTagNames) === -1) {
+			base.$el.trigger(base.settings.invalidAjaxTagEventName, base.el.tagName);
+
+			return false;
+		}
 
 		if (base.el.tagName === 'A') {
 			$.extend(ajaxOptions, {
@@ -46,7 +53,8 @@
 	handlers.ajaxPreparer.defaults = {
 		metadatakey: 'ajax-options',
 		dataStorageName: 'ajaxPreparer',
-		ajaxRequestPreparedEventName: 'ajax-request-prepared'
+		ajaxRequestPreparedEventName: 'ajax-request-prepared',
+		invalidAjaxTagEventName: 'invalid-ajax-tag'
 	};
 }(jQuery, jQuery.handlers = jQuery.handlers || {}));
 
