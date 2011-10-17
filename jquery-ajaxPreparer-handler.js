@@ -1,6 +1,6 @@
 /*!
  * jquery-preparer-handler
- * Version:  0.9.1
+ * Version:  0.9.2
  * Source:  https://github.com/CaryLandholt/jquery-ajaxPreparer-handler
  */
 
@@ -17,10 +17,10 @@
 
 		base.el = e.target;
 		base.$el = $(base.el);
-		base.options = options;
+		base.handlerOptions = options;
 		base.metadata = base.$el.data(handlers.ajaxPreparer.defaults.metadatakey);
 		base.$el.data(handlers.ajaxPreparer.defaults.dataStorageName, base);
-		base.settings = $.extend(true, {}, handlers.ajaxPreparer.defaults, base.options, base.metadata);
+		base.settings = $.extend(true, {}, handlers.ajaxPreparer.defaults, base.handlerOptions, base.metadata);
 
 		if ($.inArray(base.el.tagName, validTagNames) === -1) {
 			base.$el.trigger(base.settings.invalidAjaxTagEventName, base.el.tagName);
