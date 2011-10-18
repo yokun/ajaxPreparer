@@ -1,5 +1,5 @@
 /*!
- * jquery-preparer-handler
+ * jquery-ajaxPreparer-handler
  * Version:  0.9.2
  * Source:  https://github.com/CaryLandholt/jquery-ajaxPreparer-handler
  */
@@ -43,8 +43,9 @@
 			});
 		}
 
+		// retain context throughout successive event calls
+		ajaxOptions.context = base.el;
 		$.extend(ajaxOptions, base.settings.ajaxOptions);
-
 		base.$el.trigger(base.settings.ajaxRequestPreparedEventName, ajaxOptions);
 
 		return false;
