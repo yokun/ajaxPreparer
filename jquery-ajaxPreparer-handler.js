@@ -39,8 +39,8 @@
 			$form = base.$el.parents('form');
 
 			$.extend(ajaxOptions, {
-				type: $form.attr('method'),
-				url: $form.attr('action'),
+				type: $form.prop('method'),
+				url: $form.prop('action'),
 				data: $form.serialize()
 			});
 		}
