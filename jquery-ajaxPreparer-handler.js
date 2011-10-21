@@ -15,6 +15,8 @@
 			ajaxOptions = {},
 			$form;
 
+		e.preventDefault();
+
 		base.el = e.target;
 		base.$el = $(base.el);
 		base.handlerOptions = options;
