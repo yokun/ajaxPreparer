@@ -49,8 +49,6 @@
 		ajaxOptions.context = base.el;
 		$.extend(ajaxOptions, base.settings.ajaxOptions);
 		base.$el.trigger(base.settings.ajaxRequestPreparedEventName, ajaxOptions);
-
-		return false;
 	};
 
 	handlers.ajaxPreparer.defaults = {
