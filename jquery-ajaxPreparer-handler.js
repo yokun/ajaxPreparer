@@ -1,6 +1,6 @@
 /*!
  * jquery-ajaxPreparer-handler
- * Version:  0.9.4
+ * Version:  0.9.5
  * Source:  https://github.com/CaryLandholt/jquery-ajaxPreparer-handler
  */
 
@@ -43,6 +43,11 @@
 		// prevent the default browser handler from firing
 		// necessary for anchors and buttons
 		e.preventDefault();
+
+		// exit if there is no event
+		if (!e) {
+			return;
+		}
 
 		// Access to DOM and jQuery versions of the element
 		base.el = e.target;
