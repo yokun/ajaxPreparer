@@ -53,7 +53,7 @@
 		base.el = e.target;
 		base.$el = $(base.el);
 
-		// verify if the elements tagName is valid
+		// verify if the element's tagName is valid
 		if ($.inArray(base.el.tagName, validTagNames) === -1) {
 			base.$el.trigger(base.settings.invalidAjaxTagEventName, base.el.tagName);
 
