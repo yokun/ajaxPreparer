@@ -1,6 +1,6 @@
 /*!
  * jquery-ajaxPreparer-handler
- * Version:  0.9.2
+ * Version:  0.9.3
  * Source:  https://github.com/CaryLandholt/jquery-ajaxPreparer-handler
  */
 
@@ -33,7 +33,7 @@
 		if (base.el.tagName === 'A') {
 			$.extend(ajaxOptions, {
 				type: 'get',
-				url: base.el.href
+				url: base.$el.prop('href')
 			});
 		} else {
 			$form = base.$el.parents('form');
@@ -60,11 +60,11 @@
 }(jQuery, jQuery.handlers = jQuery.handlers || {}));
 
 /*
-$('body').delegate('form[data-ajax="true"] :submit', 'click', $.handlers.ajaxPreparer);
+$(document).on('click', 'form[data-ajax="true"] :submit', $.handlers.ajaxPreparer);
 
-$('body').delegate('a[data-ajax="true"]', 'click', function (e) {
+$(document).on('click', 'a[data-ajax="true"]', function (e) {
 	return $.handlers.ajaxPreparer(e, {ajaxOptions: {foo: 'bar'}});
 });
 
-$('body').delegate('input[data-ajax="true"], select[data-ajax="true"]', 'change', $.handlers.ajaxPreparer);
+$(document).on('change', 'input[data-ajax="true"], select[data-ajax="true"]', $.handlers.ajaxPreparer);
 */
