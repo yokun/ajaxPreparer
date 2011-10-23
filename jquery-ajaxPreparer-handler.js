@@ -1,6 +1,6 @@
 /*!
  * jquery-ajaxPreparer-handler
- * Version:  0.9.5
+ * Version:  0.9.6
  * Source:  https://github.com/CaryLandholt/jquery-ajaxPreparer-handler
  */
 
@@ -53,19 +53,19 @@
 		base.el = e.target;
 		base.$el = $(base.el);
 
-		// verify if the element's tagName is valid
-		if ($.inArray(base.el.tagName, validTagNames) === -1) {
-			base.$el.trigger(base.settings.invalidAjaxTagEventName, base.el.tagName);
-
-			return false;
-		}
-
 		base.handlerOptions = options;
 		base.metadata = base.$el.data(handlers.ajaxPreparer.defaults.metadatakey);
 
 		// Add a reverse reference to the DOM object
 		base.$el.data(handlers.ajaxPreparer.defaults.dataStorageName, base);
 		base.settings = $.extend(true, {}, handlers.ajaxPreparer.defaults, base.handlerOptions, base.metadata);
+
+		// verify if the element's tagName is valid
+		if ($.inArray(base.el.tagName, validTagNames) === -1) {
+			base.$el.trigger(base.settings.invalidAjaxTagEventName, base.el.tagName);
+
+			return false;
+		}
 
 		$.extend(ajaxOptions, getAjaxOptions(base));
 
