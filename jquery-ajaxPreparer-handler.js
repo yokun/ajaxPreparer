@@ -96,13 +96,14 @@
 		base.el = e.target;
 		// Access to jQuery version of the element
 		base.$el = $(base.el);
-		// Access to 
-		base.handlerOptions = options;
+
+		// Meta options, handler options, and default options
 		base.metadata = base.$el.data(handlers.ajaxPreparer.defaults.metadatakey);
+		base.handlerOptions = options;
+		base.settings = $.extend(true, {}, handlers.ajaxPreparer.defaults, base.handlerOptions, base.metadata);
 
 		// Add a reverse reference to the DOM object
 		base.$el.data(handlers.ajaxPreparer.defaults.dataStorageName, base);
-		base.settings = $.extend(true, {}, handlers.ajaxPreparer.defaults, base.handlerOptions, base.metadata);
 
 		// verify if the element's tagName is valid
 		if ($.inArray(base.el.tagName, validTagNames) === -1) {
