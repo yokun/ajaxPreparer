@@ -55,20 +55,15 @@
 	// only acceptable ajaxable trigger elements
 	var validTagNames = ['A', 'INPUT', 'SELECT'];
 
-	// gets ajax options from the element
-	function getAjaxOptions(base) {
-		var $form;
+	function getAjaxOptionsForAnchor($el) {
+		return {
+			type: 'get',
+			url: $el.prop('href')
+		};
+	}
 
-		// anchor was the trigger element
-		if (base.el.tagName === 'A') {
-			return {
-				type: 'get',
-				url: base.$el.prop('href')
-			};
-		}
-
-		// form will be used for type, url and data
-		$form = base.$el.parents('form');
+	function getAjaxOptionsForInput($el) {
+		var $form = $el.parents('form');
 
 		return {
 			type: $form.prop('method'),
@@ -77,52 +72,55 @@
 		};
 	}
 
-	handlers.ajaxPreparer = function (e, options) {
-		// Prevent the default browser handler from firing.
-		// Necessary for anchors and buttons.
-		e.preventDefault();
-
-		// To avoid scope issues, use 'base' instead of 'this'
-		// to reference this class from internal events and functions.
-		var base = this,
-			ajaxOptions = {};
-
-		// exit if there is no event
-		if (!e) {
-			return;
+	// gets ajax options from the element
+	function getAjaxOptionsFromElement($el, tagName) {
+		// anchor was the trigger element
+		if (tagName === 'A') {
+			return getAjaxOptionsForAnchor($el);
 		}
 
-		// Access to DOM version of the element
-		base.el = e.target;
-		// Access to jQuery version of the element
-		base.$el = $(base.el);
+		// form will be used for type, url, and data
+		return getAjaxOptionsForInput($el);
+	}
 
-		// Meta options, handler options, and default options
-		base.metadata = base.$el.data(handlers.ajaxPreparer.defaults.metadatakey);
-		base.handlerOptions = options;
-		base.settings = $.extend(true, {}, handlers.ajaxPreparer.defaults, base.handlerOptions, base.metadata);
-
-		// Add a reverse reference to the DOM object
-		base.$el.data(handlers.ajaxPreparer.defaults.dataStorageName, base);
-
-		// verify if the element's tagName is valid
-		if ($.inArray(base.el.tagName, validTagNames) === -1) {
-			base.$el.trigger(base.settings.invalidAjaxTagEventName, base.el.tagName);
-
-			return;
-		}
-
-		$.extend(ajaxOptions, getAjaxOptions(base));
+	function getAjaxOptions(el, $el, tagName, settings) {
+		var ajaxOptions = getAjaxOptionsFromElement($el, tagName);
 
 		// retain context throughout successive event calls
-		ajaxOptions.context = base.el;
-		$.extend(ajaxOptions, base.settings.ajaxOptions);
-		base.$el.trigger(base.settings.ajaxRequestPreparedEventName, ajaxOptions);
+		ajaxOptions.context = el;
+
+		return $.extend({}, ajaxOptions, settings.ajaxOptions);
+	}
+
+	// merge defaults, options, and meta options in that order
+	function getSettings($el, options) {
+		var settings = $.extend({}, handlers.ajaxPreparer.defaults, options),
+			metadata = $el.data(settings.metadatakey);
+
+		return $.extend({}, settings, metadata);
+	}
+
+	handlers.ajaxPreparer = function (e, options) {
+		e.preventDefault();
+
+		var el = e.target,
+			$el = $(el),
+			settings = getSettings($el, options),
+			tagName = el.tagName,
+			isValidTagName = $.inArray(tagName, validTagNames) !== -1;
+
+		// verify if the element's tagName is valid
+		if (!isValidTagName) {
+			$.publish(settings.invalidAjaxTagEventName, tagName);
+
+			return;
+		}
+
+		$.publish(settings.ajaxRequestPreparedEventName, getAjaxOptions(el, $el, tagName, settings));
 	};
 
 	handlers.ajaxPreparer.defaults = {
 		metadatakey: 'ajax-options',
-		dataStorageName: 'ajaxPreparer',
 		ajaxRequestPreparedEventName: 'ajax-request-prepared',
 		invalidAjaxTagEventName: 'invalid-ajax-tag'
 	};
