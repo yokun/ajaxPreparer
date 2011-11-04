@@ -1,6 +1,6 @@
 /*!
  * jquery-ajaxPreparer-handler
- * Version:  0.9.7
+ * Version:  0.9.8
  * Source:  https://github.com/CaryLandholt/jquery-ajaxPreparer-handler
  *
  * Copyright (c) 2011 Cary Landholt
@@ -121,7 +121,7 @@
 
 	handlers.ajaxPreparer.defaults = {
 		metadatakey: 'ajax-options',
-		ajaxRequestPreparedEventName: 'ajax-request-prepared',
-		invalidAjaxTagEventName: 'invalid-ajax-tag'
+		ajaxRequestPreparedEventName: '/ajax/prepared',
+		invalidAjaxTagEventName: '/ajax/prepared/error/invalidtag'
 	};
 }(jQuery, jQuery.handlers = jQuery.handlers || {}));
