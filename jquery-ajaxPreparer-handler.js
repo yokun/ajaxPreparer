@@ -1,6 +1,6 @@
 /*!
  * jquery-ajaxPreparer-handler
- * Version:  0.9.8
+ * Version:  1.0.0
  * Source:  https://github.com/CaryLandholt/jquery-ajaxPreparer-handler
  *
  * Copyright (c) 2011 Cary Landholt
@@ -106,22 +106,31 @@
 		var el = e.target,
 			$el = $(el),
 			settings = getSettings($el, options),
+			events = settings.events,
 			tagName = el.tagName,
-			isValidTagName = $.inArray(tagName, validTagNames) !== -1;
+			isValidTagName = $.inArray(tagName, validTagNames) !== -1,
+			ajaxOptions = isValidTagName ? getAjaxOptions(el, $el, tagName, settings) : {};
 
-		// verify if the element's tagName is valid
-		if (!isValidTagName) {
-			$.publish(settings.invalidAjaxTagEventName, tagName);
+		$.publish(events.ajaxPrepared, ajaxOptions);
 
-			return;
+		if (isValidTagName) {
+			$.publish(events.ajaxPreparedSuccess, ajaxOptions);
+		} else {
+			$.publish(events.ajaxPreparedError, ajaxOptions);
+			$.publish(events.ajaxPreparedErrorInvalidTag, tagName);
 		}
 
-		$.publish(settings.ajaxRequestPreparedEventName, getAjaxOptions(el, $el, tagName, settings));
+		$.publish(events.ajaxPreparedComplete, ajaxOptions);
 	};
 
 	handlers.ajaxPreparer.defaults = {
 		metadatakey: 'ajax-options',
-		ajaxRequestPreparedEventName: '/ajax/prepared',
-		invalidAjaxTagEventName: '/ajax/prepared/error/invalidtag'
+		events: {
+			ajaxPrepared: '/ajax/prepared',
+			ajaxPreparedSuccess: '/ajax/prepared/success',
+			ajaxPreparedError: '/ajax/prepared/error',
+			ajaxPreparedErrorInvalidTag: '/ajax/prepared/error/invalidtag',
+			ajaxPreparedComplete: '/ajax/prepared/complete'
+		}
 	};
 }(jQuery, jQuery.handlers = jQuery.handlers || {}));
