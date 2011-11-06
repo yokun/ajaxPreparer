@@ -1,6 +1,6 @@
 /*!
  * jquery-ajaxPreparer-handler
- * Version:  1.0.0
+ * Version:  1.0.1
  * Source:  https://github.com/CaryLandholt/jquery-ajaxPreparer-handler
  *
  * Copyright (c) 2011 Cary Landholt
@@ -116,8 +116,8 @@
 		if (isValidTagName) {
 			$.publish(events.ajaxPreparedSuccess, ajaxOptions);
 		} else {
-			$.publish(events.ajaxPreparedError, ajaxOptions);
 			$.publish(events.ajaxPreparedErrorInvalidTag, tagName);
+			$.publish(events.ajaxPreparedError, ajaxOptions);
 		}
 
 		$.publish(events.ajaxPreparedComplete, ajaxOptions);
@@ -128,8 +128,8 @@
 		events: {
 			ajaxPrepared: '/ajax/prepared',
 			ajaxPreparedSuccess: '/ajax/prepared/success',
-			ajaxPreparedError: '/ajax/prepared/error',
 			ajaxPreparedErrorInvalidTag: '/ajax/prepared/error/invalidtag',
+			ajaxPreparedError: '/ajax/prepared/error',
 			ajaxPreparedComplete: '/ajax/prepared/complete'
 		}
 	};
