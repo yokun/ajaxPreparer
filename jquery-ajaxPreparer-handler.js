@@ -12,6 +12,9 @@
  * This handler's sole responsibility is to prepare the ajax call.
  * Upon preparation an event will be fired for consumption by another handler.
  *
+ * Dependencies
+ * https://github.com/CaryLandholt/jquery-pubsub
+ *
  * Registration
  *	$(document)
  *		.on('click', 'form[data-ajax] :submit, a[data-ajax]', $.handlers.ajaxPreparer)
