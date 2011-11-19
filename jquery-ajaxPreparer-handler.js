@@ -50,9 +50,9 @@
  *	</form>
  */
 
-/*global define*/
+/*global require*/
 
-define(['jquery', 'handlers', 'pubsub'], function ($, handlers) {
+require(['jquery', 'handlers', 'pubsub'], function ($, handlers) {
 	'use strict';
 
 	// only acceptable ajaxable trigger elements
