@@ -50,9 +50,9 @@
  *	</form>
  */
 
-/*global jQuery*/
+/*global define*/
 
-(function ($, handlers) {
+define(['jquery', 'handlers', 'pubsub'], function ($, handlers) {
 	'use strict';
 
 	// only acceptable ajaxable trigger elements
@@ -136,4 +136,4 @@
 			ajaxPreparedComplete: '/ajax/prepared/complete'
 		}
 	};
-}(jQuery, jQuery.handlers = jQuery.handlers || {}));
+});
