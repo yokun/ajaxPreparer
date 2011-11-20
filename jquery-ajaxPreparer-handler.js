@@ -50,9 +50,9 @@
  *	</form>
  */
 
-/*global require*/
+/*global define*/
 
-require(['jquery', 'handlers', 'pubsub'], function ($, handlers) {
+define(['jquery', 'handlers', 'pubsub'], function ($, handlers, pubsub) {
 	'use strict';
 
 	// only acceptable ajaxable trigger elements
@@ -114,16 +114,16 @@ require(['jquery', 'handlers', 'pubsub'], function ($, handlers) {
 			isValidTagName = $.inArray(tagName, validTagNames) !== -1,
 			ajaxOptions = isValidTagName ? getAjaxOptions(el, $el, tagName, settings) : {};
 
-		$.publish(events.ajaxPrepared, ajaxOptions);
+		pubsub.publish(events.ajaxPrepared, ajaxOptions);
 
 		if (isValidTagName) {
-			$.publish(events.ajaxPreparedSuccess, ajaxOptions);
+			pubsub.publish(events.ajaxPreparedSuccess, ajaxOptions);
 		} else {
-			$.publish(events.ajaxPreparedErrorInvalidTag, tagName);
-			$.publish(events.ajaxPreparedError, ajaxOptions);
+			pubsub.publish(events.ajaxPreparedErrorInvalidTag, tagName);
+			pubsub.publish(events.ajaxPreparedError, ajaxOptions);
 		}
 
-		$.publish(events.ajaxPreparedComplete, ajaxOptions);
+		pubsub.publish(events.ajaxPreparedComplete, ajaxOptions);
 	};
 
 	handlers.ajaxPreparer.defaults = {
@@ -136,4 +136,6 @@ require(['jquery', 'handlers', 'pubsub'], function ($, handlers) {
 			ajaxPreparedComplete: '/ajax/prepared/complete'
 		}
 	};
+
+	return handlers.ajaxPreparer;
 });
