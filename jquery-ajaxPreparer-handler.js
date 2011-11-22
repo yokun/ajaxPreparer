@@ -1,6 +1,6 @@
 /*!
  * jquery-ajaxPreparer-handler
- * Version:  1.0.1
+ * Version:  1.1.0
  * Source:  https://github.com/CaryLandholt/jquery-ajaxPreparer-handler
  *
  * Copyright (c) 2011 Cary Landholt
@@ -13,7 +13,7 @@
  * Upon preparation an event will be fired for consumption by another handler.
  *
  * Dependencies
- * https://github.com/CaryLandholt/jquery-pubsub
+ * https://github.com/CaryLandholt/publish
  *
  * Registration
  *	$(document)
@@ -52,7 +52,7 @@
 
 /*global define*/
 
-define(['jquery', 'handlers', 'pubsub'], function ($, handlers, pubsub) {
+define(['jquery', 'handlers', 'publish'], function ($, handlers, publish) {
 	'use strict';
 
 	// only acceptable ajaxable trigger elements
@@ -114,16 +114,16 @@ define(['jquery', 'handlers', 'pubsub'], function ($, handlers, pubsub) {
 			isValidTagName = $.inArray(tagName, validTagNames) !== -1,
 			ajaxOptions = isValidTagName ? getAjaxOptions(el, $el, tagName, settings) : {};
 
-		pubsub.publish(events.ajaxPrepared, ajaxOptions);
+		publish(events.ajaxPrepared, ajaxOptions);
 
 		if (isValidTagName) {
-			pubsub.publish(events.ajaxPreparedSuccess, ajaxOptions);
+			publish(events.ajaxPreparedSuccess, ajaxOptions);
 		} else {
-			pubsub.publish(events.ajaxPreparedErrorInvalidTag, tagName);
-			pubsub.publish(events.ajaxPreparedError, ajaxOptions);
+			publish(events.ajaxPreparedErrorInvalidTag, tagName);
+			publish(events.ajaxPreparedError, ajaxOptions);
 		}
 
-		pubsub.publish(events.ajaxPreparedComplete, ajaxOptions);
+		publish(events.ajaxPreparedComplete, ajaxOptions);
 	};
 
 	handlers.ajaxPreparer.defaults = {
