@@ -1,6 +1,6 @@
 /*!
  * jquery-ajaxPreparer-handler
- * Version:  1.1.0
+ * Version:  1.2.0
  * Source:  https://github.com/CaryLandholt/jquery-ajaxPreparer-handler
  *
  * Copyright (c) 2011 Cary Landholt
@@ -52,11 +52,12 @@
 
 /*global define*/
 
-define(['jquery', 'handlers', 'publish'], function ($, handlers, publish) {
+define(['jquery', 'publish'], function ($, publish) {
 	'use strict';
 
 	// only acceptable ajaxable trigger elements
-	var validTagNames = ['A', 'INPUT', 'SELECT'];
+	var module = {},
+		validTagNames = ['A', 'INPUT', 'SELECT'];
 
 	function getAjaxOptionsForAnchor($el) {
 		return {
@@ -97,13 +98,13 @@ define(['jquery', 'handlers', 'publish'], function ($, handlers, publish) {
 
 	// merge defaults, options, and meta options in that order
 	function getSettings($el, options) {
-		var settings = $.extend({}, handlers.ajaxPreparer.defaults, options),
+		var settings = $.extend({}, module.defaults, options),
 			metadata = $el.data(settings.metadatakey);
 
 		return $.extend({}, settings, metadata);
 	}
 
-	handlers.ajaxPreparer = function (e, options) {
+	module = function (e, options) {
 		e.preventDefault();
 
 		var el = e.target,
@@ -126,7 +127,7 @@ define(['jquery', 'handlers', 'publish'], function ($, handlers, publish) {
 		publish(events.ajaxPreparedComplete, ajaxOptions);
 	};
 
-	handlers.ajaxPreparer.defaults = {
+	module.defaults = {
 		metadatakey: 'ajax-options',
 		events: {
 			ajaxPreparedStarted: '/ajax/prepared/started',
@@ -137,5 +138,5 @@ define(['jquery', 'handlers', 'publish'], function ($, handlers, publish) {
 		}
 	};
 
-	return handlers.ajaxPreparer;
+	return module;
 });
