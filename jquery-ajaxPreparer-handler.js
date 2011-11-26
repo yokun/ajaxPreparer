@@ -115,26 +115,26 @@ define(['jquery', 'publish'], function ($, publish) {
 			isValidTagName = $.inArray(tagName, validTagNames) !== -1,
 			ajaxOptions = isValidTagName ? getAjaxOptions(el, $el, tagName, settings) : {};
 
-		publish(events.ajaxPreparedStarted, ajaxOptions);
+		publish(events.ajaxPreparerStarted, ajaxOptions);
 
 		if (isValidTagName) {
-			publish(events.ajaxPreparedSuccess, ajaxOptions);
+			publish(events.ajaxPreparerSuccess, ajaxOptions);
 		} else {
-			publish(events.ajaxPreparedErrorInvalidTag, tagName);
-			publish(events.ajaxPreparedError, ajaxOptions);
+			publish(events.ajaxPreparerErrorInvalidTag, tagName);
+			publish(events.ajaxPreparerError, ajaxOptions);
 		}
 
-		publish(events.ajaxPreparedComplete, ajaxOptions);
+		publish(events.ajaxPreparerComplete, ajaxOptions);
 	};
 
 	module.defaults = {
 		metadatakey: 'ajax-options',
 		events: {
-			ajaxPreparedStarted: '/ajax/prepared/started',
-			ajaxPreparedSuccess: '/ajax/prepared/success',
-			ajaxPreparedErrorInvalidTag: '/ajax/prepared/error/invalidtag',
-			ajaxPreparedError: '/ajax/prepared/error',
-			ajaxPreparedComplete: '/ajax/prepared/complete'
+			ajaxPreparerStarted: '/ajax/preparer/started',
+			ajaxPreparerSuccess: '/ajax/preparer/success',
+			ajaxPreparerErrorInvalidTag: '/ajax/preparer/error/invalidtag',
+			ajaxPreparerError: '/ajax/preparer/error',
+			ajaxPreparerComplete: '/ajax/preparer/complete'
 		}
 	};
 
