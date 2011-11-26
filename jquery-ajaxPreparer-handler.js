@@ -114,7 +114,7 @@ define(['jquery', 'handlers', 'publish'], function ($, handlers, publish) {
 			isValidTagName = $.inArray(tagName, validTagNames) !== -1,
 			ajaxOptions = isValidTagName ? getAjaxOptions(el, $el, tagName, settings) : {};
 
-		publish(events.ajaxPrepared, ajaxOptions);
+		publish(events.ajaxPreparedStarted, ajaxOptions);
 
 		if (isValidTagName) {
 			publish(events.ajaxPreparedSuccess, ajaxOptions);
@@ -129,7 +129,7 @@ define(['jquery', 'handlers', 'publish'], function ($, handlers, publish) {
 	handlers.ajaxPreparer.defaults = {
 		metadatakey: 'ajax-options',
 		events: {
-			ajaxPrepared: '/ajax/prepared',
+			ajaxPreparedStarted: '/ajax/prepared/started',
 			ajaxPreparedSuccess: '/ajax/prepared/success',
 			ajaxPreparedErrorInvalidTag: '/ajax/prepared/error/invalidtag',
 			ajaxPreparedError: '/ajax/prepared/error',
