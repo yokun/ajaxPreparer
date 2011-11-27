@@ -13,12 +13,13 @@
  * Upon preparation an event will be fired for consumption by another handler.
  *
  * Dependencies
+ * https://github.com/jrburke/requirejs
+ * https://github.com/jquery/jquery
  * https://github.com/CaryLandholt/publish
  *
  * Registration
- *	$(document)
- *		.on('click', 'form[data-ajax] :submit, a[data-ajax]', $.handlers.ajaxPreparer)
- *		.on('change', 'input[data-ajax], select[data-ajax]', $.handlers.ajaxPreparer);
+ * subscribe('click', 'form[data-ajax] :submit, a[data-ajax]', callback)
+ * subscribe('change', 'input[data-ajax], select[data-ajax]', callback);
  *
  * Usage
  * http://jsfiddle.net/carylandholt/24gsA/
