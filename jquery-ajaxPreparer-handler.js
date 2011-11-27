@@ -1,6 +1,6 @@
 /*!
  * jquery-ajaxPreparer-handler
- * Version:  1.1.0
+ * Version:  1.2.0
  * Source:  https://github.com/CaryLandholt/jquery-ajaxPreparer-handler
  *
  * Copyright (c) 2011 Cary Landholt
@@ -133,7 +133,7 @@ define(['jquery', 'publish'], function ($, publish) {
 		events: {
 			ajaxPreparerStarted: '/ajax/preparer/started',
 			ajaxPreparerSuccess: '/ajax/preparer/success',
-			ajaxPreparerErrorInvalidTag: '/ajax/preparer/error/invalidtag',
+			ajaxPreparerErrorInvalidTag: '/ajax/preparer/error/invalidTag',
 			ajaxPreparerError: '/ajax/preparer/error',
 			ajaxPreparerComplete: '/ajax/preparer/complete'
 		}
