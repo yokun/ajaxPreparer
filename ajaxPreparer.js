@@ -1,7 +1,7 @@
 /*!
- * jquery-ajaxPreparer-handler
- * Version:  1.2.0
- * Source:  https://github.com/CaryLandholt/jquery-ajaxPreparer-handler
+ * ajaxPreparer
+ * Version:  1.3.0
+ * Source:  https://github.com/CaryLandholt/ajaxPreparer
  *
  * Copyright (c) 2011 Cary Landholt
  * https://github.com/CaryLandholt
