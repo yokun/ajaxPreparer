@@ -13,9 +13,9 @@
  * Upon preparation an event will be fired for consumption by another handler.
  *
  * Dependencies
- * https://github.com/jrburke/requirejs
  * https://github.com/jquery/jquery
  * https://github.com/CaryLandholt/publish
+ * https://github.com/jrburke/requirejs
  *
  * Registration
  * subscribe('click', 'form[data-ajax] :submit, a[data-ajax]', callback)
@@ -56,9 +56,13 @@
 define(['jquery', 'publish'], function ($, publish) {
 	'use strict';
 
-	// only acceptable ajaxable trigger elements
 	var module = {},
+		// only acceptable ajaxable trigger elements
 		validTagNames = ['A', 'INPUT', 'SELECT'];
+
+	function hasValidUrl(url) {
+		return url !== '' && url.indexOf('#') !== 0;
+	}
 
 	function getAjaxOptionsForAnchor($el) {
 		return {
@@ -114,14 +118,26 @@ define(['jquery', 'publish'], function ($, publish) {
 			events = settings.events,
 			tagName = el.tagName,
 			isValidTagName = $.inArray(tagName, validTagNames) !== -1,
-			ajaxOptions = isValidTagName ? getAjaxOptions(el, $el, tagName, settings) : {};
+			ajaxOptions = getAjaxOptions(el, $el, tagName, settings),
+			isValidUrl = hasValidUrl(ajaxOptions.url),
+			hasError = !(isValidTagName || isValidUrl);
 
 		publish(events.ajaxPreparerStarted, ajaxOptions);
 
-		if (isValidTagName) {
+		if (!hasError) {
 			publish(events.ajaxPreparerSuccess, ajaxOptions);
 		} else {
-			publish(events.ajaxPreparerErrorInvalidTag, tagName);
+
+			console.log(isValidTagName, isValidUrl, ajaxOptions);
+
+			if (!isValidTagName) {
+				publish(events.ajaxPreparerErrorInvalidTag, ajaxOptions);
+			}
+
+			if (!isValidUrl) {
+				publish(events.ajaxPreparerErrorMissingUrl, ajaxOptions);
+			}
+
 			publish(events.ajaxPreparerError, ajaxOptions);
 		}
 
@@ -134,6 +150,7 @@ define(['jquery', 'publish'], function ($, publish) {
 			ajaxPreparerStarted: '/ajax/preparer/started',
 			ajaxPreparerSuccess: '/ajax/preparer/success',
 			ajaxPreparerErrorInvalidTag: '/ajax/preparer/error/invalidTag',
+			ajaxPreparerErrorMissingUrl: '/ajax/preparer/error/missingUrl',
 			ajaxPreparerError: '/ajax/preparer/error',
 			ajaxPreparerComplete: '/ajax/preparer/complete'
 		}
