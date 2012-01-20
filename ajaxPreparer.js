@@ -120,16 +120,13 @@ define(['jquery', 'publish'], function ($, publish) {
 			isValidTagName = $.inArray(tagName, validTagNames) !== -1,
 			ajaxOptions = getAjaxOptions(el, $el, tagName, settings),
 			isValidUrl = hasValidUrl(ajaxOptions.url),
-			hasError = !(isValidTagName || isValidUrl);
+			hasError = !(isValidTagName && isValidUrl);
 
 		publish(events.ajaxPreparerStarted, ajaxOptions);
 
 		if (!hasError) {
 			publish(events.ajaxPreparerSuccess, ajaxOptions);
 		} else {
-
-			console.log(isValidTagName, isValidUrl, ajaxOptions);
-
 			if (!isValidTagName) {
 				publish(events.ajaxPreparerErrorInvalidTag, ajaxOptions);
 			}
