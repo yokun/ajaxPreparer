@@ -3,7 +3,7 @@
  * Version:  1.3.1
  * Source:  https://github.com/CaryLandholt/ajaxPreparer
  *
- * Copyright (c) 2011 Cary Landholt
+ * Copyright (c) 2012 Cary Landholt
  * https://github.com/CaryLandholt
  * https://twitter.com/CaryLandholt
  *
@@ -16,39 +16,6 @@
  * https://github.com/jquery/jquery
  * https://github.com/CaryLandholt/publish
  * https://github.com/jrburke/requirejs
- *
- * Registration
- * subscribe('click', 'form[data-ajax] :submit, a[data-ajax]', callback)
- * subscribe('change', 'input[data-ajax], select[data-ajax]', callback);
- *
- * Usage
- * http://jsfiddle.net/carylandholt/24gsA/
- * With the above suggested registration pattern, inputs and selects with the [data-ajax] attribute
- * will be handled on the change event.  Anchors and submits will be handled on the click event.
- * 
- *	<a href="/echo/html/"
- *		data-ajax="true"
- *		data-ajax-options='{"ajaxOptions" : {"data": {"html": "<div>My HTML</div>", "delay": 1}}}'>HTML</a>
- *
- *	<a
- *		href="/echo/json/"
- *		data-ajax="true"
- *		data-ajax-options='{"ajaxOptions" : {"type" : "post", "dataType" : "json", "data": "json={\"foo\" : \"bar\"}"}}'>JSON</a>
- *
- *	<form method="post" action="/echo/html/" data-ajax="true">
- *		<input type="text" name="FirstName" value="My First Name" data-ajax="true" />
- *		<input type="text" name="LastName" value="My Last Name" />
- *
- *		<select name="Gender" data-ajax="true">
- *			<option value="M">Male</option>
- *			<option value="F">Female</option>
- *		</select>
- *
- *		<input type="checkbox" name="IsActive" data-ajax="true" />
- *		<input type="hidden" name="IsActive" value="false" />
- *
- *		<input type="submit" value="Submit" />
- *	</form>
  */
 
 /*global define*/
