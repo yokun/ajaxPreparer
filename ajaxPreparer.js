@@ -1,6 +1,6 @@
 /*!
  * ajaxPreparer
- * Version:  1.3.0
+ * Version:  1.3.1
  * Source:  https://github.com/CaryLandholt/ajaxPreparer
  *
  * Copyright (c) 2011 Cary Landholt
@@ -102,9 +102,11 @@ define(['jquery', 'publish'], function ($, publish) {
 	}
 
 	// merge defaults, options, and meta options in that order
-	function getSettings($el, options) {
-		var settings = $.extend({}, module.defaults, options),
-			metadata = $el.data(settings.metadatakey);
+	function getSettings($el, options, isValidTagName, tagName) {
+		// if the element is an input, get the options from the form
+		var $form = isValidTagName && tagName !== 'A' ? $el.parents('form') : null,
+			settings = $.extend({}, module.defaults, options),
+			metadata = ($form || $el).data(settings.metadatakey);
 
 		return $.extend({}, settings, metadata);
 	}
@@ -114,10 +116,10 @@ define(['jquery', 'publish'], function ($, publish) {
 
 		var el = e.target,
 			$el = $(el),
-			settings = getSettings($el, options),
-			events = settings.events,
 			tagName = el.tagName,
 			isValidTagName = $.inArray(tagName, validTagNames) !== -1,
+			settings = getSettings($el, options, isValidTagName, tagName),
+			events = settings.events,
 			ajaxOptions = getAjaxOptions(el, $el, tagName, settings),
 			isValidUrl = hasValidUrl(ajaxOptions.url),
 			hasError = !(isValidTagName && isValidUrl);
