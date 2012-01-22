@@ -1,9 +1,9 @@
 # AJAX PREPARER
 
- Prepare ajax calls via convention-based configuration.
- Ajaxify anchors (links), inputs, and selects.
- This handler's sole responsibility is to prepare the ajax call.
- Upon preparation an event will be fired for consumption by another handler.
+Prepare ajax calls via convention-based configuration.
+Ajaxify anchors (links), inputs, and selects.
+This handler's sole responsibility is to prepare the ajax call.
+Upon preparation an event will be fired for consumption by another handler.
 
 
 ## Usage
