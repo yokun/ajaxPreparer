@@ -77,7 +77,7 @@ For more information on SemVer, please visit http://semver.org/.
 
 Have a bug?  Please create an issue here on GitHub!
 
-https://github.com/CaryLandholt/console/issues
+https://github.com/CaryLandholt/ajaxPreparer/issues
 
 
 ## Author
