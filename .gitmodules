@@ -1,33 +1,33 @@
-[submodule "test/jquery"]
-	path = test/jquery
+[submodule "test/submodules/jquery"]
+	path = test/submodules/jquery
 	url = git://github.com/jquery/jquery.git
-[submodule "test/publish"]
-	path = test/publish
+[submodule "test/submodules/publish"]
+	path = test/submodules/publish
 	url = git://github.com/CaryLandholt/publish.git
-[submodule "test/requirejs"]
-	path = test/requirejs
+[submodule "test/submodules/requirejs"]
+	path = test/submodules/requirejs
 	url = git://github.com/jrburke/requirejs.git
-[submodule "test/qunit"]
-	path = test/qunit
+[submodule "test/submodules/qunit"]
+	path = test/submodules/qunit
 	url = git://github.com/jquery/qunit.git
-[submodule "test/qunit-module-patch"]
-	path = test/qunit-module-patch
+[submodule "test/submodules/qunit-module-patch"]
+	path = test/submodules/qunit-module-patch
 	url = git://github.com/CaryLandholt/qunit-module-patch.git
-[submodule "test/window"]
-	path = test/window
+[submodule "test/submodules/window"]
+	path = test/submodules/window
 	url = git://github.com/CaryLandholt/window.git
-[submodule "test/pubsub"]
-	path = test/pubsub
+[submodule "test/submodules/pubsub"]
+	path = test/submodules/pubsub
 	url = git://github.com/CaryLandholt/pubsub.git
-[submodule "test/doc"]
-	path = test/doc
+[submodule "test/submodules/doc"]
+	path = test/submodules/doc
 	url = git://github.com/CaryLandholt/doc.git
-[submodule "test/document"]
-	path = test/document
+[submodule "test/submodules/document"]
+	path = test/submodules/document
 	url = git://github.com/CaryLandholt/document.git
-[submodule "test/subscribe"]
-	path = test/subscribe
+[submodule "test/submodules/subscribe"]
+	path = test/submodules/subscribe
 	url = git://github.com/CaryLandholt/subscribe.git
-[submodule "test/unsubscribe"]
-	path = test/unsubscribe
+[submodule "test/submodules/unsubscribe"]
+	path = test/submodules/unsubscribe
 	url = git://github.com/CaryLandholt/unsubscribe.git
