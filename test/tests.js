@@ -243,4 +243,71 @@ require(['jquery', 'subscribe', 'unsubscribe', 'ajaxPreparer', 'qunit'], functio
 
 		$input.change();
 	});
+
+	module('button', {
+		setup: function () {
+			subscribe('click', 'button.test', function (e) {
+				//e.preventDefault();
+			});
+		},
+		teardown: function () {
+			$fixture.empty();
+
+			unsubscribe('click', 'button.test');
+			unsubscribe('/ajax/preparer/started');
+			unsubscribe('/ajax/preparer/success');
+			unsubscribe('/ajax/preparer/error/invalidTag');
+			unsubscribe('/ajax/preparer/error/missingUrl');
+			unsubscribe('/ajax/preparer/error');
+			unsubscribe('/ajax/preparer/complete');
+		}
+	});
+
+	test('test for common button scenario', 12, function () {
+		var $form = $('<form/>', {
+				method: 'get',
+				action: 'http://www.google.com/'
+			}).appendTo($fixture),
+			$button = $('<button/>', {
+				'class': 'test',
+				type: 'submit'
+			}).appendTo($form);
+
+		subscribe('click', 'button.test', ajaxPreparer);
+
+		subscribe('/ajax/preparer/started', function (e, ajaxOptions) {
+			ok(true, 'started event called');
+			strictEqual(ajaxOptions.type, 'get', 'request type should be retrieved from the form method');
+			strictEqual(ajaxOptions.url, 'http://www.google.com/', 'request action should be retrieved from the form action');
+			deepEqual(ajaxOptions.context, $button[0], 'verify context is set correctly');
+		});
+
+		subscribe('/ajax/preparer/success', function (e, ajaxOptions) {
+			ok(true, 'success event called');
+			strictEqual(ajaxOptions.type, 'get', 'request type should be retrieved from the form method');
+			strictEqual(ajaxOptions.url, 'http://www.google.com/', 'request action should be retrieved from the form action');
+			deepEqual(ajaxOptions.context, $button[0], 'verify context is set properly');
+		});
+
+		subscribe('/ajax/preparer/error/invalidTag', function (e, ajaxOptions) {
+			ok(false, 'invalidTag event should not fire');
+		});
+
+		subscribe('/ajax/preparer/error/missingUrl', function (e, ajaxOptions) {
+			ok(false, 'missingUrl event should not fire');
+		});
+
+		subscribe('/ajax/preparer/error', function (e, ajaxOptions) {
+			ok(false, 'error event should not fire');
+		});
+
+		subscribe('/ajax/preparer/complete', function (e, ajaxOptions) {
+			ok(true, 'complete event called');
+			strictEqual(ajaxOptions.type, 'get', 'request type should be retrieved from the form method');
+			strictEqual(ajaxOptions.url, 'http://www.google.com/', 'request action should be retrieved from the form action');
+			deepEqual(ajaxOptions.context, $button[0], 'verify context is set properly');
+		});
+
+		$button.click();
+	});
 });
