@@ -1,6 +1,6 @@
 /*!
  * ajaxPreparer
- * Version:  1.3.1
+ * Version:  1.3.2
  * Source:  https://github.com/CaryLandholt/ajaxPreparer
  *
  * Copyright (c) 2012 Cary Landholt
@@ -25,7 +25,7 @@ define(['jquery', 'publish'], function ($, publish) {
 
 	var module = {},
 		// only acceptable ajaxable trigger elements
-		validTagNames = ['A', 'INPUT', 'SELECT'];
+		validTagNames = ['A', 'BUTTON', 'INPUT', 'SELECT'];
 
 	function hasValidUrl(url) {
 		return url !== '' && url.indexOf('#') !== 0;
