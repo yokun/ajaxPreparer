@@ -31,3 +31,6 @@
 [submodule "test/submodules/unsubscribe"]
 	path = test/submodules/unsubscribe
 	url = git://github.com/CaryLandholt/unsubscribe.git
+[submodule "test/submodules/win"]
+	path = test/submodules/win
+	url = git://github.com/CaryLandholt/win.git
