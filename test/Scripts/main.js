@@ -12,9 +12,10 @@
 			publish: 'core/publish',
 			pubsub: 'core/pubsub',
 			'qunit-official': 'libs/qunit',
-			qunit: 'libs/qunit-module-patch',
+			qunit: 'patches/qunit-module-patch',
 			subscribe: 'core/subscribe',
 			unsubscribe: 'core/unsubscribe',
+			win: 'core/win',
 			window: 'core/window'
 		}
 	});

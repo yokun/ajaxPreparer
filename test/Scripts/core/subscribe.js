@@ -11,8 +11,8 @@
  * A module providing access to the pubsub subscribe method
  *
  * Dependencies
- * https://github.com/CaryLandholt/pubsub
  * https://github.com/jrburke/requirejs
+ * https://github.com/CaryLandholt/jquery-pubsub
  */
 
 /*global define*/

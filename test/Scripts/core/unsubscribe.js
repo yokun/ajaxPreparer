@@ -12,7 +12,7 @@
  *
  * Dependencies
  * https://github.com/jrburke/requirejs
- * https://github.com/CaryLandholt/pubsub
+ * https://github.com/CaryLandholt/jquery-pubsub
  */
 
 /*global define*/

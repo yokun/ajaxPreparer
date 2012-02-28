@@ -11,9 +11,9 @@
  * A module providing access to the jQuery wrapped window.document
  *
  * Dependencies
- * https://github.com/CaryLandholt/document
- * https://github.com/jquery/jquery
  * https://github.com/jrburke/requirejs
+ * https://github.com/jquery/jquery
+ * https://github.com/CaryLandholt/document
  */
 
 /*global define*/
