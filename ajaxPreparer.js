@@ -62,7 +62,7 @@ define(['jquery', 'publish'], function($, publish) {
   module = function(e, options) {
     var $el, ajaxOptions, el, events, hasError, isValidTagName, isValidUrl, settings, tagName;
     e.preventDefault();
-    el = e.target;
+    el = e.currentTarget;
     $el = $(el);
     tagName = el.tagName;
     isValidTagName = $.inArray(tagName, validTagNames) !== -1;
